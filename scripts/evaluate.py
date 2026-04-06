@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+from typing import Optional
 import re
 import subprocess
 import sys
@@ -170,7 +171,7 @@ def is_step_started(config: StepConfig) -> bool:
     return not any(sentinel in content for sentinel in _TEMPLATE_SENTINELS)
 
 
-def detect_changed_steps() -> list[str] | None:
+def detect_changed_steps() -> Optional[list[str]]:
     """Detect which steps have changed files using git diff.
 
     Returns a list of step IDs that have both changed files (detected via
