@@ -13,5 +13,18 @@
 
 
 def group_by_domain(emails: list[str]) -> dict[str, int]:
-    """Translate the JavaScript behavior above into Python."""
-    raise NotImplementedError("Implement with Copilot translation assistance")
+    """Example:
+    >>> group_by_domain(['Alice@example.com', 'bob@EXAMPLE.com', 'invalid', 'charlie@other.org'])
+    {'example.com': 2, 'other.org': 1}
+    """
+    counts: dict[str, int] = {}
+    for email in emails:
+        if '@' not in email:
+            continue
+        domain = email.split('@', 1)[1].strip().lower()
+        if not domain:
+            continue
+        counts[domain] = counts.get(domain, 0) + 1
+
+    # Return a new dict sorted by domain name (lexicographic)
+    return dict(sorted(counts.items(), key=lambda item: item[0]))
